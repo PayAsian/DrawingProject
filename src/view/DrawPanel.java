@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 
-public class DrawPannel extends JPanel
+public class DrawPanel extends JPanel
 {
 
 }

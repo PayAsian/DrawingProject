@@ -11,7 +11,7 @@ import controller.DrawController;
 import java.util.ArrayList;
 
 
-public class ShapePannel 
+public class ShapePanel 
 {
 	private DrawController baseController;
 	private ArrayList<Rectangle> rectangleList;
