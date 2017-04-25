@@ -122,11 +122,32 @@ public class ShapePanel
 			Polygon current = new Polygon(xVerticies, yVerticies, vertexCount);
 			triangleList.add(current);
 		}
+		this.repaint();
 	}
 	
 	public void addPolygons()
 	{
+		if(polygonList.size() > 500)
+		{
+			polygonList.clear();
+		}
 		
+		for(int index = 0; index < 30; index++)
+		{
+			int vertexCount = (int)(Math.random() * 7) + 4;
+			int [] xVertices = new int[vertexCount];
+			int [] yVertices = new int[vertexCount];
+			for(int vertex = 0; vertex < vertexCount; vertex++)
+			{
+				int xCorner = (int)(Math.random() * this.getWidth());
+				int yCorner = (int)(Math.random() * this.getHeight());
+				xVertices[vertex] = xCorner;
+				yVertices[vertex] = yCorner;
+			}
+			Polygon current = new Polygon(xVertices, yVertices, vertexCount);
+			polygonList.add(current);
+		}
+		this.repaint();
 	}
 	
 	public void reset()
