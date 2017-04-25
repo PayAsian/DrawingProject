@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Polygon;
 import javax.swing.JPanel;
 import controller.DrawController;
 import java.util.ArrayList;
@@ -14,13 +16,29 @@ import java.util.ArrayList;
 public class ShapePanel 
 {
 	private DrawController baseController;
-	private ArrayList<Rectangle> rectangleList;
+	private ArrayList<Shape> rectangleList;
+	private ArrayList<Shape> triangleList;
+	private ArrayList<Shape> circleList;
+	private ArrayList<Shape> ellipseList;
+	private ArrayList<Shape> polygonList;
+	private ArrayList<ArrayList<Shape>> shapes;
 	
 	public ShapePanel(DrawController baseController)
 	{
 		super();
 		this.baseController = baseController;
-		rectangleList = new ArrayList<Rectangle>();
+		rectangleList = new ArrayList<Shape>();
+		ellipseList = new ArrayList<Shape>();
+		triangleList = new ArrayList<Shape>();
+		circleList = new ArrayList<Shape>();
+		polygonList = new ArrayList<Shape>();
+		shapes = new ArrayList<ArrayList<Shape>>();
+		shapes.add(circleList);
+		shapes.add(rectangleList);
+		shapes.add(ellipseList);
+		shapes.add(triangleList);
+		shapes.add(polygonList);
+	
 		
 		setupPanel();
 	}
@@ -43,7 +61,7 @@ public class ShapePanel
 	
 	public void addRectangles()
 	{
-		for(int index = 0; index < 500; inde++)
+		for(int index = 0; index < 500; index++)
 		{
 			int width = (int) (Math.random() * 120) + 1;
 			int height = (int) (Math.random() * 150) + 15;
@@ -56,10 +74,45 @@ public class ShapePanel
 		this.repaint();
 	}
 	
-	protected void paintComponent(Graphics graphics)
+	public void addCircles()
 	{
-		this.setBackground(Color.BLUE);
+		if(circleList.size() > 500)
+		{
+			for(int index = 0; index < 30; index++)
+			{
+				int radius = (int)(Math.random() * 25) + 2;
+				int xCorner = (int)(Math.random() * this.getWidth() - 15);
+				int yCorner = (int)(Math.random() * this.getHeigth() - 15);
+			}
+			
+			
+		}
+	}
+	
+	public void adddTriangles()
+	{
 		
+	}
+	
+	public void addPolygons()
+	{
+		
+	}
+	
+	public void reset()
+	{
+		for(int index = 0; index < shapes.size(); index++)
+		{
+			shapes.get(index).clear();
+		}
+		this.setBackground(getRandomColor());
+		this.repaint();
+	}
+	
+	
+	
+	protected void paintComponent(Graphics graphics)
+	{	
 		Graphics2D drawingGraphics = (Graphics2D) graphics;
 		for(Rectangle currentRectangle : rectangleList)
 		{
@@ -76,6 +129,29 @@ public class ShapePanel
 			else
 			{
 			drawingGraphics.draw(currentRectangle);
+			}
+		}
+	}
+	
+	private void drawShapes(ArrayList<Shape> shapeList,Graphics2D graphics)
+	{
+		for(Shape currentShape : shapeList)
+		{
+			graphics.setColor(getRandomColor();
+			int strokeWidth = (int) (Math.random()* 10) + 1;
+			graphics.setStroke(new BasicStroke(strokeWidth));
+			
+			int randomness = (int)(Math.random() * 35);
+			
+			if(randomness % 5==0 || randomness * 7 == 0)
+			{
+				graphics.fill(currentShape);
+				graphics.setColor(getRandomColor());
+				graphics.draw(currentShape);
+			}
+			else
+			{
+				graphics.draw(currentShape);
 			}
 		}
 	}
