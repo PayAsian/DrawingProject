@@ -8,9 +8,17 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Polygon;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import controller.DrawController;
 import java.util.ArrayList;
+import controller.DrawController;
 
 
 public class ShapePanel 
@@ -68,7 +76,7 @@ public class ShapePanel
 			int xCorner = (int) (Math.random() * this.getWidth() - 15);
 			int yCorner = (int) (Math.random() * this.getHeight() - 15);
 			
-			Rectangle currenRectangle = new Rectangle(xCorner, yCorner, width, height);
+			Rectangle currentRectangle = new Rectangle(xCorner, yCorner, width, height);
 			rectangleList.add(currentRectangle);
 		}
 		this.repaint();
@@ -78,20 +86,42 @@ public class ShapePanel
 	{
 		if(circleList.size() > 500)
 		{
-			for(int index = 0; index < 30; index++)
-			{
-				int radius = (int)(Math.random() * 25) + 2;
-				int xCorner = (int)(Math.random() * this.getWidth() - 15);
-				int yCorner = (int)(Math.random() * this.getHeigth() - 15);
-			}
-			
-			
+			circleList.clear();
 		}
+		
+		for(int index = 0; index < 30; index++)
+		{
+			int radius = (int)(Math.random() * 25) + 2;
+			int xCorner = (int)(Math.random() * this.getWidth() - 15);
+			int yCorner = (int)(Math.random() * this.getHeight() - 15);
+			Ellipse2D.Double current = new Ellipse2D.Double(xCorner, yCorner, radius, radius);
+			circleList.add(current);
+		}
+		this.repaint();
 	}
 	
 	public void adddTriangles()
 	{
+		if(triangleList.size() > 500)
+		{
+			triangleList.clear();
+		}
 		
+		for(int index = 0; index < 30; index++)
+		{
+			int vertexCount = 3;
+			int [] xVerticies = new int[vertexCount];
+			int [] yVerticies = new int[vertexCount];
+			for(int vertex = 0; vertex < vertexCount; vertex++)
+			{
+				int xCorner = (int)(Math.random() * this.getWidth());
+				int yCorner = (int)(Math.random() * this.getHeight());
+				xVerticies[vertex] = xCorner;
+				yVerticies[vertex] = yCorner;
+			}
+			Polygon current = new Polygon(xVerticies, yVerticies, vertexCount);
+			triangleList.add(current);
+		}
 	}
 	
 	public void addPolygons()
@@ -114,7 +144,7 @@ public class ShapePanel
 	protected void paintComponent(Graphics graphics)
 	{	
 		Graphics2D drawingGraphics = (Graphics2D) graphics;
-		for(Rectangle currentRectangle : rectangleList)
+		for(Shape currentRectangle : rectangleList)
 		{
 			drawingGraphics.setColor(getRandomColor());
 			int strokeWidth = (int) (Math.random() * 10) + 1;
@@ -137,7 +167,7 @@ public class ShapePanel
 	{
 		for(Shape currentShape : shapeList)
 		{
-			graphics.setColor(getRandomColor();
+			graphics.setColor(getRandomColor());
 			int strokeWidth = (int) (Math.random()* 10) + 1;
 			graphics.setStroke(new BasicStroke(strokeWidth));
 			
