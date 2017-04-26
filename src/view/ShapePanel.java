@@ -100,7 +100,7 @@ public class ShapePanel
 		this.repaint();
 	}
 	
-	public void adddTriangles()
+	public void addTriangles()
 	{
 		if(triangleList.size() > 500)
 		{
