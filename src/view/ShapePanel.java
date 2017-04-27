@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import controller.DrawController;
 
 
-public class ShapePanel 
+public class ShapePanel extends JPanel
 {
 	private DrawController baseController;
 	private ArrayList<Shape> rectangleList;
@@ -212,7 +212,7 @@ public class ShapePanel
 		BufferedImage panelImage = new BufferedImage(this.getSize().width, this.getSize().height,BufferedImage.TYPE_INT_ARGB);
 		Graphics fileGraphics = panelImage.getGraphics();
 		
-		Color background = new Color(getBackground.getRed(), getBackground().getGreen(), getBackground().getBlue());
+		Color background = new Color(getBackground().getRed(), getBackground().getGreen(), getBackground().getBlue());
 		fileGraphics.setColor(background);
 		fileGraphics.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		this.printAll(fileGraphics);
